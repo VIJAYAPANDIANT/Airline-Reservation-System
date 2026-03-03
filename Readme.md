@@ -13,6 +13,10 @@ This project implements a robust relational database for an Airline Reservation 
 🗄️ Database Schema Reference
 The database consists of structured tables tailored for airline management.
 
+### 🗺️ Entity Relationship Diagram (ERD)
+
+You can view the visual schema design here: [DB Diagram - Google Drive](https://drive.google.com/file/d/1aPpZHlUhFCAFHqKVuJwO90tyL0crX7Ky/view?usp=sharing)
+
 1. Aircraft & Seats
 
 - **Aircraft**: Tracks the fleet (model, manufacturer, year).
