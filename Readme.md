@@ -1,273 +1,73 @@
-🛒 Online Retail Sales Database Design
+# Airline Reservation System Database Design
+
 📌 Project Overview
+This project implements a robust relational database for an Airline Reservation System. It is designed to handle complex aviation operations, including flight scheduling, aircraft seat configurations, passenger bookings, and financial transaction tracking. The schema ensures data integrity using constraints and triggers, preventing issues like double-booking while supporting deep analytical reporting.
 
-The Online Retail Sales Database Design project implements a fully normalized Third Normal Form (3NF) relational database system for an online retail (e-commerce) platform.
+📂 File Structure
+| File | Description |
+| :--- | :--- |
+| airline_reservation_system_setup.sql | Defines the core database structure, including tables, indexes, triggers, and stored procedures. |
+| full_setup.sql | A unified script combining schema creation, data insertion, and sample analytical queries. |
+| setup_and_test_fixed.bat | An automated Windows batch script to find MySQL, execute the setup, and display results. |
 
-This database is designed to efficiently manage:
-
-👤 Customers
-
-📦 Products
-
-🛍️ Orders
-
-🧾 Order Items
-
-💳 Payments
-
-The schema ensures:
-
-✅ Data integrity using Primary & Foreign Keys
-
-✅ Minimal redundancy (3NF normalization)
-
-✅ Accurate historical transaction tracking
-
-✅ Efficient analytical reporting
-
-✅ Scalability for real-world retail applications
-
-This project demonstrates strong understanding of:
-
-Relational Database Design
-
-Normalization (1NF, 2NF, 3NF)
-
-Entity Relationships
-
-SQL Constraints
-
-Analytical SQL Queries & Views
-
-📂 Project File Structure
-File Name	Description
-schema.sql	Creates the database OnlineRetailDB and defines all tables with constraints and relationships.
-data.sql	Inserts sample data for testing (Customers, Products, Orders, etc.).
-queries.sql	Contains analytical queries and reporting Views for business insights.
-full_setup.sql	Combined script that executes schema creation, data insertion, and queries in one file.
-setup_and_test.bat	Windows automation script to run the complete setup process in one click.
 🗄️ Database Schema Reference
+The database consists of structured tables tailored for airline management.
 
-The system consists of 5 core tables, carefully structured in 3NF.
+1. Aircraft & Seats
 
-1️⃣ Customers Table
+- **Aircraft**: Tracks the fleet (model, manufacturer, year).
+- **Seats**: Manages seat layout (seat_number, class: Economy/Business/First) for each aircraft.
 
-Stores customer account and shipping information.
+2. Routes & Flights
 
-Column	Type	Description
-customer_id	INT (PK)	Unique customer identifier
-first_name	VARCHAR	Customer first name
-last_name	VARCHAR	Customer last name
-email	VARCHAR (UNIQUE)	Unique email address
-phone	VARCHAR	Contact number
-address	VARCHAR	Shipping address
-city	VARCHAR	City
-state	VARCHAR	State
-zip_code	VARCHAR	Postal code
-created_at	TIMESTAMP	Account creation date
+- **Airports**: Stores global airport details (IATA codes, city, country).
+- **Routes**: Defines connections between airports with base pricing.
+- **Flights**: Specific schedules for aircraft on given routes.
 
-🔒 Constraints Used:
+3. Passengers & Users
 
-Primary Key
+- **Users**: System users/agents who manage bookings.
+- **Passengers**: Detailed traveler information including passport data.
 
-Unique Constraint (email)
+4. Bookings & Items
 
-2️⃣ Products Table
+- **Bookings**: Master record for a reservation with a unique 6-character PNR.
+- **Booking_Items**: Specific seat assignments for passengers on specific flights.
 
-Maintains product inventory information.
+5. Payments
 
-Column	Type	Description
-product_id	INT (PK)	Unique product identifier
-name	VARCHAR	Product name
-description	TEXT	Product details
-price	DECIMAL	Unit price
-stock_quantity	INT	Available stock
-category	VARCHAR	Product category
+- **Payments**: Records transaction details, methods (Credit Card, PayPal), and success/refund status.
 
-📦 Supports inventory tracking and category-based filtering.
+� Setup and Installation
+Prerequisites
 
-3️⃣ Orders Table
+- MySQL Server 8.0 or higher.
+- MySQL added to System PATH (optional, the script attempts to find it).
 
-Tracks customer purchases.
+Option 1: Automatic Setup (Windows)
 
-Column	Type	Description
-order_id	INT (PK)	Unique order ID
-customer_id	INT (FK)	References Customers
-order_date	TIMESTAMP	Date of order
-status	ENUM	Pending / Shipped / Delivered / Cancelled
-total_amount	DECIMAL	Total order value
+1. Navigate to the project folder.
+2. Double-click **setup_and_test_fixed.bat**.
+3. Enter your MySQL credentials when prompted.
+4. The script will initialize the database and run all analysis tests.
 
-🔗 Relationships:
+Option 2: Manual Execution
 
-One Customer → Many Orders
+1. Login to MySQL: `mysql -u root -p`
+2. Run the unified setup: `SOURCE full_setup.sql;`
 
-4️⃣ Order_Items Table (Junction Table)
-
-Handles the Many-to-Many relationship between Orders and Products.
-
-Column	Type	Description
-order_item_id	INT (PK)	Unique ID
-order_id	INT (FK)	References Orders
-product_id	INT (FK)	References Products
-quantity	INT	Units purchased
-unit_price	DECIMAL	Price at time of purchase
-
-🧠 Important Design Decision:
-unit_price is stored separately to preserve historical pricing even if product prices change later.
-
-5️⃣ Payments Table
-
-Tracks payment transactions for orders.
-
-Column	Type	Description
-payment_id	INT (PK)	Unique payment ID
-order_id	INT (FK)	Linked order
-amount	DECIMAL	Paid amount
-payment_method	ENUM	Credit Card / PayPal / Bank Transfer
-status	ENUM	Success / Failed
-
-💳 Supports transaction auditing and reconciliation.
-
-🔄 Database Relationships Overview
-
-Customers → Orders (1:M)
-
-Orders → Order_Items (1:M)
-
-Products → Order_Items (1:M)
-
-Orders → Payments (1:M)
-
-The schema strictly follows 3NF principles:
-
-No repeating groups
-
-No partial dependencies
-
-No transitive dependencies
-
-🚀 Setup & Installation
-🔧 Prerequisites
-
-MySQL Server 8.0+
-
-MySQL Command Line Client
-
-(Optional) MySQL Workbench
-
-Windows OS (for .bat automation)
-
-⚡ Option 1: Automatic Setup (Windows)
-
-Navigate to the project folder.
-
-Double-click:
-
-setup_and_test.bat
-
-Enter:
-
-MySQL username (default: root)
-
-MySQL password
-
-The script will automatically:
-
-Create database
-
-Create tables
-
-Insert sample data
-
-Execute analytical queries
-
-Display results
-
-✔ Recommended for quick testing.
-
-🛠 Option 2: Manual Setup
-Step 1: Login to MySQL
-mysql -u root -p
-Step 2: Run Schema
-SOURCE schema.sql;
-Step 3: Insert Sample Data
-SOURCE data.sql;
-Step 4: Run Reports
-SOURCE queries.sql;
 📊 Analytical Queries & Views
+The system includes built-in views for business intelligence:
 
-The queries.sql file contains reporting views for business intelligence.
+1. Detailed Booking Report (`vw_booking_details`)
 
-📈 1. Product Sales Report (ProductSales View)
+- Provides a full manifest of bookings, flight info, and passenger names.
+- Usage: `SELECT * FROM vw_booking_details;`
 
-Analyzes product-level revenue and sales volume.
+2. Flight Revenue Analytics (`vw_flight_revenue`)
 
-Columns:
+- Calculates total seats sold and revenue generated per flight.
+- Usage: `SELECT * FROM vw_flight_revenue;`
 
-product_name
-
-total_units_sold
-
-total_revenue
-
-Usage:
-SELECT * FROM ProductSales;
-
-📌 Helps identify best-selling products.
-
-👑 2. Customer Spending Report (CustomerSpending View)
-
-Identifies high-value customers.
-
-Columns:
-
-full_name
-
-total_orders
-
-total_spent
-
-Usage:
-SELECT * FROM CustomerSpending;
-
-📌 Useful for loyalty programs and marketing strategies.
-
-🧠 Learning Outcomes
-
-This project demonstrates:
-
-Advanced SQL Table Design
-
-Normalization to 3NF
-
-Foreign Key Relationships
-
-ENUM Constraints
-
-Analytical Queries
-
-View Creation
-
-Real-world E-commerce Modeling
-
-🔮 Future Improvements
-
-Add indexing for performance optimization
-
-Implement stored procedures
-
-Add triggers for stock auto-update
-
-Add refund handling system
-
-Integrate with frontend application
-
-Add user authentication system
-
-Create dashboard using Power BI / Tableau
-
-📜 Author
-
-Design and Implementation by:
-
-👨‍💻 VIJAYAPANDIAN.T
+� Author
+Design and Implementation by VIJAYAPANDIAN.T.
