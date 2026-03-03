@@ -38,7 +38,7 @@ The database consists of structured tables tailored for airline management.
 
 - **Payments**: Records transaction details, methods (Credit Card, PayPal), and success/refund status.
 
-� Setup and Installation
+🚀 Setup and Installation
 Prerequisites
 
 - MySQL Server 8.0 or higher.
@@ -69,5 +69,8 @@ The system includes built-in views for business intelligence:
 - Calculates total seats sold and revenue generated per flight.
 - Usage: `SELECT * FROM vw_flight_revenue;`
 
-� Author
+---
+
+## 📜 Author
+
 Design and Implementation by VIJAYAPANDIAN.T.
