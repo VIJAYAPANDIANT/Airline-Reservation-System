@@ -1,19 +1,19 @@
 # Airline Reservation System Database Design
 
-📌 Project Overview
+## 📌 Project Overview
 This project implements a robust relational database for an Airline Reservation System. It is designed to handle complex aviation operations, including flight scheduling, aircraft seat configurations, passenger bookings, and financial transaction tracking. The schema ensures data integrity using constraints and triggers, preventing issues like double-booking while supporting deep analytical reporting.
 
-📂 File Structure
+## 📂 File Structure
 | File | Description |
 | :--- | :--- |
 | airline_reservation_system_setup.sql | Defines the core database structure, including tables, indexes, triggers, and stored procedures. |
 | full_setup.sql | A unified script combining schema creation, data insertion, and sample analytical queries. |
 | setup_and_test_fixed.bat | An automated Windows batch script to find MySQL, execute the setup, and display results. |
 
-🗄️ Database Schema Reference
+## 🗄️ Database Schema Reference
 The database consists of structured tables tailored for airline management.
 
-### 🗺️ Entity Relationship Diagram (ERD)
+## 🗺️ Entity Relationship Diagram (ERD)
 
 You can view the visual schema design here: [DB Diagram - Google Drive](https://drive.google.com/file/d/1aPpZHlUhFCAFHqKVuJwO90tyL0crX7Ky/view?usp=sharing)
 
@@ -42,7 +42,7 @@ You can view the visual schema design here: [DB Diagram - Google Drive](https://
 
 - **Payments**: Records transaction details, methods (Credit Card, PayPal), and success/refund status.
 
-🚀 Setup and Installation
+## 🚀 Setup and Installation
 Prerequisites
 
 - MySQL Server 8.0 or higher.
@@ -60,7 +60,7 @@ Option 2: Manual Execution
 1. Login to MySQL: `mysql -u root -p`
 2. Run the unified setup: `SOURCE full_setup.sql;`
 
-📊 Analytical Queries & Views
+## 📊 Analytical Queries & Views
 The system includes built-in views for business intelligence:
 
 1. Detailed Booking Report (`vw_booking_details`)
