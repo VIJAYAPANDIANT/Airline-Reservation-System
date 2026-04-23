@@ -1,67 +1,74 @@
 # ✈️ Airline Reservation System Database Design
 
-📌 Project Overview
-This project implements a robust relational database for an Airline Reservation System. It is designed to handle complex aviation operations, including flight scheduling, aircraft seat configurations, passenger bookings, and financial transaction tracking. The schema ensures data integrity using constraints and triggers, preventing issues like double-booking while supporting deep analytical reporting.
+[![Database](https://img.shields.io/badge/Database-MySQL-blue.svg)](https://www.mysql.com/)
+[![SQL](https://img.shields.io/badge/Language-SQL-orange.svg)](https://en.wikipedia.org/wiki/SQL)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-📂 File Structure
-| File | Description |
-| :--- | :--- |
-| airline_reservation_system_setup.sql | Defines the core database structure, including tables, indexes, triggers, and stored procedures. |
-| full_setup.sql | A unified script combining schema creation, data insertion, and sample analytical queries. |
-| setup_and_test_fixed.bat | An automated Windows batch script to find MySQL, execute the setup, and display results. |
+## 📌 Project Overview
+The **Airline Reservation System** is a comprehensive relational database solution designed to manage the intricate operations of a modern airline. From global flight scheduling and aircraft seat management to passenger bookings and financial transaction tracking, this system provides a robust foundation for aviation business intelligence.
 
-🗄️ Database Schema Reference
-The database consists of structured tables tailored for airline management.
+This project focuses on **data integrity**, **automated workflows**, and **analytical reporting** to ensure a seamless experience for both airline administrators and passengers.
+
+---
+
+## 🚀 Key Features
+- **Intelligent Scheduling**: Manage global routes, airports, and flight schedules with automated arrival/departure validation.
+- **Dynamic Seat Mapping**: Support for multiple aircraft models with unique seat layouts (Economy, Business, First Class).
+- **Secure Bookings**: Automated PNR (Passenger Name Record) generation and booking management.
+- **Double-Booking Prevention**: Advanced SQL Triggers ensure no seat is booked twice for the same flight.
+- **Financial Tracking**: Integrated payment processing with support for multiple payment methods and refund tracking.
+- **Analytical Insights**: Built-in views for revenue tracking, passenger manifests, and flight occupancy reports.
+
+---
+
+## 🏗️ Database Architecture
 
 ### 🗺️ Entity Relationship Diagram (ERD)
+The schema is designed for high normalization and performance. You can view the visual design here:
+> [!TIP]
+> **[View Interactive ER Diagram](https://drive.google.com/file/d/1aPpZHlUhFCAFHqKVuJwO90tyL0crX7Ky/view?usp=sharing)**
 
-You can view the visual schema design here: [DB Diagram - Google Drive](https://drive.google.com/file/d/1aPpZHlUhFCAFHqKVuJwO90tyL0crX7Ky/view?usp=sharing)
+### 📂 Project Documentation
+Access the comprehensive project report and detailed documentation here:
+> [!IMPORTANT]
+> **[📂 Detailed Project Document](https://drive.google.com/file/d/1wos0Lv9pgOYhve2-ZPyirkn7kaoYTsaX/view?usp=sharing)**
 
-1. Aircraft & Seats
+### 🗄️ Core Tables
+| Category | Tables | Description |
+| :--- | :--- | :--- |
+| **User Management** | `roles`, `users` | Handles authentication and administrative access levels. |
+| **Aviation Core** | `airports`, `aircraft`, `seats` | Defines the physical infrastructure (ports, planes, layouts). |
+| **Operations** | `routes`, `flights`, `passengers` | Manages flight paths, schedules, and traveler data. |
+| **Commerce** | `bookings`, `booking_items`, `payments` | Tracks reservations, seat assignments, and financial records. |
+| **Pricing** | `flight_pricing` | Manages class-based multipliers for dynamic ticket pricing. |
 
-- **Aircraft**: Tracks the fleet (model, manufacturer, year).
-- **Seats**: Manages seat layout (seat_number, class: Economy/Business/First) for each aircraft.
+---
 
-2. Routes & Flights
+## 🛠️ Setup & Installation
 
-- **Airports**: Stores global airport details (IATA codes, city, country).
-- **Routes**: Defines connections between airports with base pricing.
-- **Flights**: Specific schedules for aircraft on given routes.
+### Prerequisites
+- **MySQL Server 8.0+**
+- **Windows OS** (for automatic setup) or any OS (for manual setup)
 
-3. Passengers & Users
+### Option 1: Automatic Setup (Windows)
+1. Clone the repository to your local machine.
+2. Double-click the `setup_and_test_fixed.bat` file.
+3. Follow the on-screen prompts to enter your MySQL credentials.
+4. The script will automatically create the database, seed it with sample data, and run verification tests.
 
-- **Users**: System users/agents who manage bookings.
-- **Passengers**: Detailed traveler information including passport data.
+### Option 2: Manual Setup
+```sql
+-- 1. Login to your MySQL Terminal
+mysql -u your_username -p
 
-4. Bookings & Items
+-- 2. Execute the full setup script
+SOURCE full_setup.sql;
+```
 
-- **Bookings**: Master record for a reservation with a unique 6-character PNR.
-- **Booking_Items**: Specific seat assignments for passengers on specific flights.
+---
 
-5. Payments
-
-- **Payments**: Records transaction details, methods (Credit Card, PayPal), and success/refund status.
-
-🚀 Setup and Installation
-Prerequisites
-
-- MySQL Server 8.0 or higher.
-- MySQL added to System PATH (optional, the script attempts to find it).
-
-Option 1: Automatic Setup (Windows)
-
-1. Navigate to the project folder.
-2. Double-click **setup_and_test_fixed.bat**.
-3. Enter your MySQL credentials when prompted.
-4. The script will initialize the database and run all analysis tests.
-
-Option 2: Manual Execution
-
-1. Login to MySQL: `mysql -u root -p`
-2. Run the unified setup: `SOURCE full_setup.sql;`
-
-📊 Analytical Queries & Views
-The system includes built-in views for business intelligence:
+## 📊 Business Intelligence & Reporting
+The system includes pre-configured Views and Analytical Queries for immediate reporting:
 
 ### 1. Detailed Booking Manifest
 Provides a complete overview of every passenger, their flight, seat assignment, and payment status.
